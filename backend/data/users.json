@@ -1,0 +1,28 @@
+[
+  {
+    "id": "4539a618-a505-4719-a5dc-5982c80e55ac",
+    "email": "admin@hotel.com",
+    "password": "$2b$12$sLFF/C/MPk2OBpAshshfGOLC7qODnQTy6Gn9NrRayHvWJyFe6d4iq",
+    "firstName": "Admin",
+    "lastName": "User",
+    "phone": "+1-555-0123",
+    "role": "admin",
+    "isActive": true,
+    "createdAt": "2025-08-23T09:56:42.041Z",
+    "updatedAt": "2025-08-23T09:57:41.416Z",
+    "lastLogin": "2025-08-23T09:57:41.415Z"
+  },
+  {
+    "id": "11b06b73-735c-4554-8456-914db2cfd1fc",
+    "email": "ipangSiregar1@gmail.com",
+    "password": "$2b$12$5J8MO9c/QGpz96QISVwxGeaf9Rc4QBmKNphBd9RW70lVWTlFRcJUe",
+    "firstName": "Muhammad Ali",
+    "lastName": "Irfansyah",
+    "phone": "085890081550",
+    "role": "guest",
+    "isActive": true,
+    "createdAt": "2025-08-23T09:56:42.043Z",
+    "updatedAt": "2025-08-23T09:56:42.044Z",
+    "lastLogin": null
+  }
+]
