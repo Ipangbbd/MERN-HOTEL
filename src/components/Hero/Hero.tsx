@@ -1,95 +1,216 @@
-import React from 'react';
-import { Calendar, Users, Bed, TrendingUp } from 'lucide-react';
-import { useRoomContext } from '../../context/RoomContext';
-import LoadingSpinner from '../UI/LoadingSpinner';
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, CalendarDays, Users, MapPin, Percent } from 'lucide-react';
 
-const Hero: React.FC = () => {
-  const { stats, loading } = useRoomContext();
+const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [checkIn, setCheckIn] = useState('24/08/2025');
+  const [checkOut, setCheckOut] = useState('25/08/2025');
+  const [rooms, setRooms] = useState('1');
+  const [promoCode, setPromoCode] = useState('');
+
+  const slides = [
+    {
+      image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'Enjoy The Best Moments Of Life'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'Luxury Redefined'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'Comfort Beyond Compare'
+    }
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleCheckAvailability = () => {
+    console.log('Checking availability...', { checkIn, checkOut, rooms, promoCode });
+  };
 
   return (
-    <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Hero Content */}
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-              Luxury Hotel
-              <span className="block text-blue-200">Booking System</span>
-            </h1>
-            <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-              Experience premium hospitality with our state-of-the-art booking system. 
-              Real-time availability, seamless reservations, and exceptional service.
-            </p>
-            
-            {/* Call to Action */}
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-white text-blue-700 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                Book Now
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-700 transition-all duration-200">
-                View Rooms
-              </button>
+    <div className="relative h-screen overflow-hidden">
+      {/* Navigation */}
+      <nav className="absolute top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <span className="text-2xl font-bold text-gray-800">
+                my<span className="text-amber-600">/</span>orison.com
+              </span>
+            </div>
+            <div className="hidden md:block">
+              <div className="flex items-center space-x-8">
+                <a href="#" className="text-amber-600 hover:text-amber-700 font-medium">HOME</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900">OFFERS</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900">LOYALTY PROGRAMME</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900">ABOUT US</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900">CAREER</a>
+              </div>
             </div>
           </div>
+        </div>
+      </nav>
 
-          {/* Live Stats Dashboard */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-            <h3 className="text-2xl font-bold mb-6 text-center">Live Availability Dashboard</h3>
-            
-            {loading ? (
-              <div className="flex justify-center py-8">
-                <LoadingSpinner />
-              </div>
-            ) : stats ? (
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mx-auto mb-3">
-                    <Bed className="h-8 w-8 text-white" />
+      {/* Hero Slider */}
+      <div className="relative h-full">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${slide.image})`,
+              }}
+            />
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+        ))}
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+        
+        <button
+          onClick={nextSlide}
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex space-x-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                index === currentSlide ? 'bg-white' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-30 h-full flex items-center justify-center">
+          <div className="text-center text-white px-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wide mb-8 leading-tight">
+              {slides[currentSlide].title}
+            </h1>
+          </div>
+        </div>
+
+        {/* Booking Form */}
+        <div className="absolute bottom-0 left-0 right-0 z-40 p-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl p-6">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                {/* Destination */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
+                    Destination
+                  </label>
+                  <div className="relative">
+                    <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="City, Hotel"
+                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50"
+                      defaultValue=""
+                    />
                   </div>
-                  <div className="text-3xl font-bold">{stats.available}</div>
-                  <div className="text-blue-200">Available Rooms</div>
                 </div>
-                
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-16 h-16 bg-red-500 rounded-full mx-auto mb-3">
-                    <Users className="h-8 w-8 text-white" />
+
+                {/* Check In/Out */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
+                    Check In/Check Out
+                  </label>
+                  <div className="relative">
+                    <CalendarDays className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={`${checkIn} - ${checkOut}`}
+                      onChange={(e) => {
+                        const dates = e.target.value.split(' - ');
+                        if (dates.length === 2) {
+                          setCheckIn(dates[0]);
+                          setCheckOut(dates[1]);
+                        }
+                      }}
+                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50"
+                    />
                   </div>
-                  <div className="text-3xl font-bold">{stats.booked}</div>
-                  <div className="text-blue-200">Booked Rooms</div>
                 </div>
-                
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-16 h-16 bg-blue-500 rounded-full mx-auto mb-3">
-                    <Calendar className="h-8 w-8 text-white" />
+
+                {/* Rooms */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
+                    Rooms
+                  </label>
+                  <div className="relative">
+                    <Users className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <select
+                      value={rooms}
+                      onChange={(e) => setRooms(e.target.value)}
+                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50 appearance-none"
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5+</option>
+                    </select>
                   </div>
-                  <div className="text-3xl font-bold">{stats.total}</div>
-                  <div className="text-blue-200">Total Rooms</div>
                 </div>
-                
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-16 h-16 bg-orange-500 rounded-full mx-auto mb-3">
-                    <TrendingUp className="h-8 w-8 text-white" />
+
+                {/* Promotion Code */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
+                    Promotion Code
+                  </label>
+                  <div className="relative">
+                    <Percent className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder=""
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value)}
+                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50"
+                    />
                   </div>
-                  <div className="text-3xl font-bold">{stats.occupancyRate}%</div>
-                  <div className="text-blue-200">Occupancy</div>
                 </div>
-              </div>
-            ) : (
-              <div className="text-center py-8">
-                <p className="text-blue-200">Unable to load stats</p>
-              </div>
-            )}
-            
-            <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-blue-200">Last updated:</span>
-                <span className="font-mono">{new Date().toLocaleTimeString()}</span>
+
+                {/* Search Button */}
+                <div>
+                  <button
+                    onClick={handleCheckAvailability}
+                    className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 uppercase tracking-wide"
+                  >
+                    Check Availability
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

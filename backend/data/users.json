@@ -9,8 +9,8 @@
     "role": "admin",
     "isActive": true,
     "createdAt": "2025-08-23T09:56:42.041Z",
-    "updatedAt": "2025-08-23T09:57:41.416Z",
-    "lastLogin": "2025-08-23T09:57:41.415Z"
+    "updatedAt": "2025-08-24T04:24:01.431Z",
+    "lastLogin": "2025-08-24T04:24:01.431Z"
   },
   {
     "id": "11b06b73-735c-4554-8456-914db2cfd1fc",
@@ -22,7 +22,7 @@
     "role": "guest",
     "isActive": true,
     "createdAt": "2025-08-23T09:56:42.043Z",
-    "updatedAt": "2025-08-23T09:56:42.044Z",
-    "lastLogin": null
+    "updatedAt": "2025-08-24T04:14:49.487Z",
+    "lastLogin": "2025-08-24T04:14:49.487Z"
   }
 ]

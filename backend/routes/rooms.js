@@ -209,6 +209,7 @@ router.post('/:id/book', authenticateToken, validateRequest(bookingSchema), asyn
       ...room,
       isBooked: true,
       guestName: req.body.guestName,
+      guestId: req.user.userId,
       checkInDate: req.body.checkInDate,
       checkOutDate: req.body.checkOutDate
     });
@@ -244,11 +245,11 @@ router.post('/:id/checkout', authenticateToken, async (req, res, next) => {
       });
     }
 
-    // Check if the current user is the one who booked the room
-    if (room.guestId !== req.user.userId) {
+    // Check if the current user is the one who booked the room OR if user is admin
+    if (room.guestId !== req.user.userId && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
-        message: 'You can only check out from rooms you have booked'
+        message: 'You can only check out from rooms you have booked. Admins can check out any room.'
       });
     }
     
@@ -265,7 +266,7 @@ router.post('/:id/checkout', authenticateToken, async (req, res, next) => {
     
     res.status(200).json({
       success: true,
-      message: 'Checkout completed successfully',
+      message: req.user.role === 'admin' ? 'Admin checkout completed successfully' : 'Checkout completed successfully',
       data: updatedRoom
     });
   } catch (error) {

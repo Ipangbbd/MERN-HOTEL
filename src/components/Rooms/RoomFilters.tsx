@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { Search, Filter, X } from 'lucide-react';
 import { RoomFilters as RoomFiltersType, RoomType } from '../../types/room';
 
@@ -12,19 +12,31 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
 
   const roomTypes: RoomType[] = ['single', 'double', 'suite', 'deluxe'];
 
-  const handleFilterChange = (key: keyof RoomFiltersType, value: any) => {
+  // Memoize the filter change handler to prevent unnecessary re-renders
+  const handleFilterChange = useCallback((key: keyof RoomFiltersType, value: any) => {
     const newFilters = { ...filters, [key]: value };
     setFilters(newFilters);
     onFilterChange(newFilters);
-  };
+  }, [filters, onFilterChange]);
 
-  const clearFilters = () => {
-    setFilters({});
-    onFilterChange({});
-  };
+  // Memoize clear filters function
+  const clearFilters = useCallback(() => {
+    const emptyFilters = {};
+    setFilters(emptyFilters);
+    onFilterChange(emptyFilters);
+  }, [onFilterChange]);
 
-  const hasActiveFilters = Object.values(filters).some(value => 
-    value !== undefined && value !== null && value !== ''
+  // Memoize active filters check to prevent recalculation on every render
+  const hasActiveFilters = useMemo(() => 
+    Object.values(filters).some(value => 
+      value !== undefined && value !== null && value !== ''
+    ), [filters]
+  );
+
+  // Memoize active filters count
+  const activeFiltersCount = useMemo(() => 
+    Object.values(filters).filter(v => v !== undefined && v !== null && v !== '').length,
+    [filters]
   );
 
   return (
@@ -32,17 +44,19 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
       {/* Search Bar */}
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
           <input
             type="text"
             placeholder="Search by room number, type, or description..."
             value={filters.search || ''}
             onChange={(e) => handleFilterChange('search', e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow duration-200"
+            autoComplete="off"
           />
         </div>
         
         <button
+          type="button"
           onClick={() => setShowFilters(!showFilters)}
           className={`flex items-center space-x-2 px-6 py-3 rounded-lg border transition-colors duration-200 ${
             showFilters || hasActiveFilters
@@ -53,8 +67,8 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
           <Filter className="h-5 w-5" />
           <span>Filters</span>
           {hasActiveFilters && (
-            <span className="bg-blue-600 text-white text-xs rounded-full px-2 py-1 ml-2">
-              {Object.values(filters).filter(v => v !== undefined && v !== null && v !== '').length}
+            <span className="bg-blue-600 text-white text-xs rounded-full px-2 py-1 ml-2 min-w-[20px] text-center">
+              {activeFiltersCount}
             </span>
           )}
         </button>
@@ -62,7 +76,7 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
 
       {/* Advanced Filters */}
       {showFilters && (
-        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm animate-in slide-in-from-top-2 duration-200">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Room Type Filter */}
             <div>
@@ -70,7 +84,7 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
               <select
                 value={filters.type || ''}
                 onChange={(e) => handleFilterChange('type', e.target.value || undefined)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow duration-200"
               >
                 <option value="">All Types</option>
                 {roomTypes.map(type => (
@@ -90,7 +104,7 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
                   const value = e.target.value;
                   handleFilterChange('available', value === '' ? undefined : value === 'true');
                 }}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow duration-200"
               >
                 <option value="">All Rooms</option>
                 <option value="true">Available Only</option>
@@ -108,7 +122,8 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
                 value={filters.minPrice || ''}
                 onChange={(e) => handleFilterChange('minPrice', e.target.value ? Number(e.target.value) : undefined)}
                 placeholder="0"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow duration-200"
+                autoComplete="off"
               />
             </div>
 
@@ -122,7 +137,8 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
                 value={filters.maxPrice || ''}
                 onChange={(e) => handleFilterChange('maxPrice', e.target.value ? Number(e.target.value) : undefined)}
                 placeholder="1000"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow duration-200"
+                autoComplete="off"
               />
             </div>
           </div>
@@ -131,6 +147,7 @@ const RoomFilters: React.FC<RoomFiltersProps> = ({ onFilterChange }) => {
           {hasActiveFilters && (
             <div className="mt-6 flex justify-end">
               <button
+                type="button"
                 onClick={clearFilters}
                 className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
               >

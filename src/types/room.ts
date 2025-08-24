@@ -5,6 +5,7 @@ export interface Room {
   price: number;
   isBooked: boolean;
   guestName?: string | null;
+  guestId?: string | null;
   checkInDate?: string | null;
   checkOutDate?: string | null;
   amenities: string[];
