@@ -4,10 +4,11 @@
     "roomNumber": "101",
     "type": "single",
     "price": 99,
-    "isBooked": false,
-    "guestName": null,
-    "checkInDate": null,
-    "checkOutDate": null,
+    "isBooked": true,
+    "guestName": "Muhammad Ali Irfansyah",
+    "guestId": "11b06b73-735c-4554-8456-914db2cfd1fc",
+    "checkInDate": "2025-08-27",
+    "checkOutDate": "2025-08-29",
     "amenities": [
       "Wi-Fi",
       "TV",
@@ -16,7 +17,7 @@
     "description": "Comfortable single room with city view",
     "imageUrl": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T11:23:43.363Z",
-    "updatedAt": "2025-08-22T11:36:13.790Z"
+    "updatedAt": "2025-08-25T21:43:17.462Z"
   },
   {
     "id": "3cbc6bf1-3761-4d88-9fdb-ca18a3d586a4",
@@ -107,10 +108,11 @@
     "roomNumber": "104",
     "type": "single",
     "price": 95,
-    "isBooked": true,
-    "guestName": "Sarah Johnson",
-    "checkInDate": "2025-08-24",
-    "checkOutDate": "2025-08-26",
+    "isBooked": false,
+    "guestName": null,
+    "guestId": null,
+    "checkInDate": null,
+    "checkOutDate": null,
     "amenities": [
       "Wi-Fi",
       "TV",
@@ -120,7 +122,7 @@
     "description": "Cozy single room with workspace area",
     "imageUrl": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T12:00:00.000Z",
-    "updatedAt": "2025-08-24T09:15:30.123Z"
+    "updatedAt": "2025-08-25T21:50:19.603Z"
   },
   {
     "id": "9c3d5e7f-8a1b-4c6d-2e9f-0b4a6c8e1d3f",
@@ -149,10 +151,11 @@
     "roomNumber": "106",
     "type": "double",
     "price": 169,
-    "isBooked": true,
-    "guestName": "Michael & Lisa Chen",
-    "checkInDate": "2025-08-23",
-    "checkOutDate": "2025-08-27",
+    "isBooked": false,
+    "guestName": null,
+    "guestId": null,
+    "checkInDate": null,
+    "checkOutDate": null,
     "amenities": [
       "Wi-Fi",
       "TV",
@@ -165,7 +168,7 @@
     "description": "Superior double room with marble bathroom and city lights view",
     "imageUrl": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T12:10:00.000Z",
-    "updatedAt": "2025-08-23T14:20:15.456Z"
+    "updatedAt": "2025-08-25T21:45:35.828Z"
   },
   {
     "id": "8d5b3f1a-4c7e-4a9b-6d2f-5e8a7b3c9d1e",
@@ -246,10 +249,11 @@
     "roomNumber": "302",
     "type": "deluxe",
     "price": 449,
-    "isBooked": true,
-    "guestName": "Robert Williams",
-    "checkInDate": "2025-08-25",
-    "checkOutDate": "2025-08-28",
+    "isBooked": false,
+    "guestName": null,
+    "guestId": null,
+    "checkInDate": null,
+    "checkOutDate": null,
     "amenities": [
       "Wi-Fi",
       "TV",
@@ -265,7 +269,7 @@
     "description": "Penthouse deluxe with private terrace and 360-degree city view",
     "imageUrl": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T12:30:00.000Z",
-    "updatedAt": "2025-08-25T11:45:22.789Z"
+    "updatedAt": "2025-08-26T00:03:36.682Z"
   },
   {
     "id": "9a3f6c1e-5d8b-4c2a-7f9e-1b4c8d5a6e3f",
@@ -419,10 +423,11 @@
     "roomNumber": "206",
     "type": "honeymoon",
     "price": 359,
-    "isBooked": true,
-    "guestName": "James & Emma Thompson",
-    "checkInDate": "2025-08-26",
-    "checkOutDate": "2025-08-29",
+    "isBooked": false,
+    "guestName": null,
+    "guestId": null,
+    "checkInDate": null,
+    "checkOutDate": null,
     "amenities": [
       "Wi-Fi",
       "TV",
@@ -438,6 +443,6 @@
     "description": "Romantic honeymoon suite with rose petals, champagne, and intimate lighting",
     "imageUrl": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T13:05:00.000Z",
-    "updatedAt": "2025-08-26T10:20:33.567Z"
+    "updatedAt": "2025-08-25T21:49:12.879Z"
   }
 ]

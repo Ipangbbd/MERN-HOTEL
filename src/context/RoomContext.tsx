@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { Room, RoomStats, ApiResponse } from '../types/room';
+import { Room, RoomStats } from '../types/room';
 import { roomService } from '../services/roomService';
 
 interface RoomState {

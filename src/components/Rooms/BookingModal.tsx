@@ -75,41 +75,45 @@ const BookingModal: React.FC<BookingModalProps> = ({ room, isOpen, onClose }) =>
   if (!isOpen || !room) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white border border-neutral-200 max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-gray-900">Book Room {room.roomNumber}</h2>
+        <div className="flex items-center justify-between p-6 border-b border-neutral-200">
+          <h2 className="text-xl font-bold text-neutral-900 uppercase tracking-wide">
+            Book Room {room.roomNumber}
+          </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+            className="p-2 hover:bg-neutral-100 transition-colors duration-200 group"
           >
-            <X className="h-5 w-5 text-gray-500" />
+            <X className="h-5 w-5 text-neutral-400 group-hover:text-neutral-700" />
           </button>
         </div>
 
         {/* Room Info */}
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-neutral-200">
           <div className="flex space-x-4">
             <img
               src={room.imageUrl || 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg'}
               alt={`Room ${room.roomNumber}`}
-              className="w-20 h-20 object-cover rounded-lg"
+              className="w-20 h-20 object-cover"
             />
             <div className="flex-1">
-              <h3 className="font-semibold text-gray-900 capitalize">{room.type} Room</h3>
-              <p className="text-sm text-gray-600 mb-2">{room.description}</p>
-              <div className="text-lg font-bold text-blue-600">${room.price}/night</div>
+              <h3 className="font-bold text-neutral-900 uppercase tracking-wide mb-1">
+                {room.type} Room
+              </h3>
+              <p className="text-sm text-neutral-600 mb-3 leading-relaxed">{room.description}</p>
+              <div className="text-xl font-bold text-neutral-900">${room.price}/night</div>
             </div>
           </div>
         </div>
 
         {/* Booking Form */}
         <form onSubmit={handleSubmit} className="p-6">
-          <div className="space-y-4">
+          <div className="space-y-6">
             {/* Guest Name */}
             <div>
-              <label className="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center space-x-2 text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">
                 <User className="h-4 w-4" />
                 <span>Guest Name</span>
               </label>
@@ -119,14 +123,14 @@ const BookingModal: React.FC<BookingModalProps> = ({ room, isOpen, onClose }) =>
                 value={formData.guestName}
                 onChange={handleInputChange}
                 placeholder="Enter full name"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-neutral-300 px-4 py-3 focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors text-neutral-900 font-medium"
                 required
               />
             </div>
 
             {/* Check-in Date */}
             <div>
-              <label className="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center space-x-2 text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">
                 <Calendar className="h-4 w-4" />
                 <span>Check-in Date</span>
               </label>
@@ -136,14 +140,14 @@ const BookingModal: React.FC<BookingModalProps> = ({ room, isOpen, onClose }) =>
                 value={formData.checkInDate}
                 onChange={handleInputChange}
                 min={new Date().toISOString().split('T')[0]}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-neutral-300 px-4 py-3 focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors text-neutral-900 font-medium"
                 required
               />
             </div>
 
             {/* Check-out Date */}
             <div>
-              <label className="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center space-x-2 text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">
                 <Calendar className="h-4 w-4" />
                 <span>Check-out Date</span>
               </label>
@@ -153,22 +157,24 @@ const BookingModal: React.FC<BookingModalProps> = ({ room, isOpen, onClose }) =>
                 value={formData.checkOutDate}
                 onChange={handleInputChange}
                 min={formData.checkInDate || new Date().toISOString().split('T')[0]}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-neutral-300 px-4 py-3 focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors text-neutral-900 font-medium"
                 required
               />
             </div>
 
             {/* Booking Summary */}
             {calculateNights() > 0 && (
-              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                <h4 className="font-semibold text-blue-900 mb-2">Booking Summary</h4>
-                <div className="space-y-1 text-sm text-blue-800">
-                  <div className="flex justify-between">
-                    <span>{calculateNights()} nights</span>
-                    <span>${room.price} × {calculateNights()}</span>
+              <div className="bg-neutral-50 border border-neutral-200 p-4">
+                <h4 className="font-bold text-neutral-900 mb-3 uppercase tracking-wide">
+                  Booking Summary
+                </h4>
+                <div className="space-y-2 text-sm text-neutral-700">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium">{calculateNights()} nights</span>
+                    <span className="font-medium">${room.price} × {calculateNights()}</span>
                   </div>
-                  <div className="flex justify-between font-semibold border-t border-blue-300 pt-2">
-                    <span>Total</span>
+                  <div className="flex justify-between items-center font-bold border-t border-neutral-300 pt-3 text-neutral-900">
+                    <span className="uppercase tracking-wide">Total</span>
                     <span>${totalPrice}</span>
                   </div>
                 </div>
@@ -179,9 +185,9 @@ const BookingModal: React.FC<BookingModalProps> = ({ room, isOpen, onClose }) =>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center space-x-2"
+              className="w-full bg-neutral-900 text-white py-4 px-6 font-semibold hover:bg-neutral-800 disabled:bg-neutral-400 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center space-x-2 uppercase tracking-wide"
             >
-              <CreditCard className="h-4 w-4" />
+              <CreditCard className="h-5 w-5" />
               <span>{loading ? 'Booking...' : 'Book Now'}</span>
             </button>
           </div>

@@ -19,16 +19,16 @@ const AuthModal: React.FC<AuthModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto relative">
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+      <div className="bg-white max-w-lg w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 z-10"
+          className="absolute top-6 right-6 p-3 bg-neutral-100 hover:bg-neutral-200 transition-colors duration-200 z-10 group"
         >
-          <X className="h-5 w-5 text-gray-500" />
+          <X className="h-5 w-5 text-neutral-600 group-hover:text-neutral-900 transition-colors" />
         </button>
 
-        <div className="p-8">
+        <div className="p-8 pt-12">
           {mode === "login" ? (
             <LoginForm
               onSwitchToRegister={() => setMode("register")}

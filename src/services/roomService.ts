@@ -1,11 +1,12 @@
 import { Room, RoomStats, ApiResponse } from '../types/room';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+// const API_BASE_URL = 'http://localhost:5000/api';
 
 class RoomService {
   private async request<T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> {
     try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      const response = await fetch(`http://localhost:5000/api${endpoint}`, {
+        credentials: 'include', // Include cookies for authentication
         headers: {
           'Content-Type': 'application/json',
           ...options?.headers,

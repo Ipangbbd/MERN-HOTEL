@@ -9,8 +9,8 @@
     "role": "admin",
     "isActive": true,
     "createdAt": "2025-08-23T09:56:42.041Z",
-    "updatedAt": "2025-08-24T04:50:01.645Z",
-    "lastLogin": "2025-08-24T04:50:01.644Z"
+    "updatedAt": "2025-08-26T00:52:45.776Z",
+    "lastLogin": "2025-08-26T00:52:45.775Z"
   },
   {
     "id": "11b06b73-735c-4554-8456-914db2cfd1fc",
@@ -22,7 +22,33 @@
     "role": "guest",
     "isActive": true,
     "createdAt": "2025-08-23T09:56:42.043Z",
-    "updatedAt": "2025-08-24T04:14:49.487Z",
-    "lastLogin": "2025-08-24T04:14:49.487Z"
+    "updatedAt": "2025-08-26T00:52:19.003Z",
+    "lastLogin": "2025-08-26T00:52:19.002Z"
+  },
+  {
+    "id": "b32ff27a-c571-4dbc-adc9-a8903ef6fc6d",
+    "email": "codevwithali@gmail.com",
+    "password": "$2b$12$JnYyGPl551v4UhyH2RZ3NelYTj5Gq.cVKJSj1PNFRFKjkWtUdg5Wm",
+    "firstName": "Joseph",
+    "lastName": "Stalin",
+    "phone": "88213113605",
+    "role": "guest",
+    "isActive": true,
+    "createdAt": "2025-08-25T21:44:09.835Z",
+    "updatedAt": "2025-08-25T21:44:09.836Z",
+    "lastLogin": null
+  },
+  {
+    "id": "4b9bca2d-6aee-413f-9083-242df131d295",
+    "email": "Hiura123@gmail.com",
+    "password": "$2b$12$NrGBvUCvk5PlAv9W4xmS3uN6xhCB/y2IiX9iYFpMdGsQjZOjqOxVG",
+    "firstName": "Hiura",
+    "lastName": "Mihate",
+    "phone": "88278091262",
+    "role": "guest",
+    "isActive": true,
+    "createdAt": "2025-08-26T00:02:56.088Z",
+    "updatedAt": "2025-08-26T00:02:56.088Z",
+    "lastLogin": null
   }
 ]

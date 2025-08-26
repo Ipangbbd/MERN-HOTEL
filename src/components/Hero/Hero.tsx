@@ -1,217 +1,281 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, CalendarDays, Users, MapPin, Percent } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, CalendarDays, Users, MapPin, Percent, Search } from 'lucide-react';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [checkIn, setCheckIn] = useState('24/08/2025');
-  const [checkOut, setCheckOut] = useState('25/08/2025');
-  const [rooms, setRooms] = useState('1');
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [guests, setGuests] = useState('2 guests, 1 room');
+  const [destination, setDestination] = useState('');
   const [promoCode, setPromoCode] = useState('');
+  const [isAutoSliding, setIsAutoSliding] = useState(true);
 
   const slides = [
     {
       image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Enjoy The Best Moments Of Life'
+      title: 'Where luxury meets comfort',
+      subtitle: 'Experience hospitality redefined at every touchpoint'
     },
     {
       image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Luxury Redefined'
+      title: 'Crafted for the discerning guest',
+      subtitle: 'Every detail curated for your perfect stay'
     },
     {
       image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Comfort Beyond Compare'
+      title: 'Elegance in every moment',
+      subtitle: 'Create memories that last a lifetime'
     }
   ];
 
+  // Auto-slide functionality
+  useEffect(() => {
+    if (!isAutoSliding) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [isAutoSliding, slides.length]);
+
   const nextSlide = () => {
+    setIsAutoSliding(false);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   const prevSlide = () => {
+    setIsAutoSliding(false);
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  const handleCheckAvailability = () => {
-    console.log('Checking availability...', { checkIn, checkOut, rooms, promoCode });
+  const goToSlide = (index: number) => {
+    setIsAutoSliding(false);
+    setCurrentSlide(index);
   };
 
-  return (
-    <div className="relative h-screen overflow-hidden">
-      {/* Navigation */}
-      <nav className="absolute top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <span className="text-2xl font-bold text-gray-800">
-                my<span className="text-amber-600">/</span>orison.com
-              </span>
-            </div>
-            <div className="hidden md:block">
-              <div className="flex items-center space-x-8">
-                <a href="#" className="text-amber-600 hover:text-amber-700 font-medium">HOME</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900">OFFERS</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900">LOYALTY PROGRAMME</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900">ABOUT US</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900">CAREER</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Searching...', { destination, checkIn, checkOut, guests, promoCode });
+  };
 
-      {/* Hero Slider */}
-      <div className="relative h-full">
+  // Format today's date
+  useEffect(() => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    const formatDate = (date: Date) => {
+      return date.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit', 
+        year: 'numeric'
+      });
+    };
+
+    if (!checkIn) setCheckIn(formatDate(today));
+    if (!checkOut) setCheckOut(formatDate(tomorrow));
+  }, []);
+
+  return (
+    <section className="relative h-screen overflow-hidden">
+      {/* Image Slides */}
+      <div className="absolute inset-0">
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 transition-all duration-1000 ease-out ${
+              index === currentSlide 
+                ? 'opacity-100 scale-100' 
+                : 'opacity-0 scale-105'
             }`}
           >
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url(${slide.image})`,
-              }}
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
             />
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/60" />
           </div>
         ))}
+      </div>
 
-        {/* Navigation Arrows */}
+      {/* Navigation Controls */}
+      <div className="absolute inset-0 z-20">
         <button
           onClick={prevSlide}
-          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+          className="absolute left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-300 group"
+          aria-label="Previous slide"
         >
-          <ChevronLeft className="w-6 h-6 text-white" />
+          <ChevronLeft className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
         </button>
         
         <button
           onClick={nextSlide}
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-40 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+          className="absolute right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-300 group"
+          aria-label="Next slide"
         >
-          <ChevronRight className="w-6 h-6 text-white" />
+          <ChevronRight className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
         </button>
+      </div>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex space-x-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                index === currentSlide ? 'bg-white' : 'bg-white/50'
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-30 h-full flex items-center justify-center">
-          <div className="text-center text-white px-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wide mb-8 leading-tight">
+      {/* Content */}
+      <div className="relative z-30 h-full flex flex-col">
+        {/* Main Content */}
+        <div className="flex-1 flex items-center justify-center px-6">
+          <div className="text-center text-white max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-4 leading-[1.1]">
               {slides[currentSlide].title}
             </h1>
+            <p className="text-lg sm:text-xl text-white/80 font-light max-w-2xl mx-auto leading-relaxed">
+              {slides[currentSlide].subtitle}
+            </p>
           </div>
         </div>
 
         {/* Booking Form */}
-        <div className="absolute bottom-0 left-0 right-0 z-40 p-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl p-6">
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+        <div className="px-4 sm:px-6 pb-6">
+          <div className="max-w-5xl mx-auto">
+            <form onSubmit={handleSearch} className="bg-white shadow-2xl border border-neutral-200/20">
+              {/* Mobile-first responsive grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200">
+                
                 {/* Destination */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
-                    Destination
+                <div className="p-4 lg:p-6">
+                  <label className="block text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-2">
+                    Where
                   </label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <MapPin className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
                     <input
                       type="text"
-                      placeholder="City, Hotel"
-                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50"
-                      defaultValue=""
+                      placeholder="Search destinations"
+                      value={destination}
+                      onChange={(e) => setDestination(e.target.value)}
+                      className="w-full pl-6 text-neutral-900 placeholder-neutral-400 bg-transparent border-0 focus:ring-0 p-0 text-sm font-medium"
                     />
                   </div>
                 </div>
 
-                {/* Check In/Out */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
-                    Check In/Check Out
+                {/* Check-in */}
+                <div className="p-4 lg:p-6">
+                  <label className="block text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-2">
+                    Check in
                   </label>
                   <div className="relative">
-                    <CalendarDays className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <CalendarDays className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
                     <input
-                      type="text"
-                      value={`${checkIn} - ${checkOut}`}
+                      type="date"
+                      value={checkIn.split('/').reverse().join('-')}
                       onChange={(e) => {
-                        const dates = e.target.value.split(' - ');
-                        if (dates.length === 2) {
-                          setCheckIn(dates[0]);
-                          setCheckOut(dates[1]);
-                        }
+                        const date = new Date(e.target.value);
+                        setCheckIn(date.toLocaleDateString('en-GB'));
                       }}
-                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50"
+                      className="w-full pl-6 text-neutral-900 bg-transparent border-0 focus:ring-0 p-0 text-sm font-medium"
                     />
                   </div>
                 </div>
 
-                {/* Rooms */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
-                    Rooms
+                {/* Check-out */}
+                <div className="p-4 lg:p-6">
+                  <label className="block text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-2">
+                    Check out
                   </label>
                   <div className="relative">
-                    <Users className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <CalendarDays className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                    <input
+                      type="date"
+                      value={checkOut.split('/').reverse().join('-')}
+                      onChange={(e) => {
+                        const date = new Date(e.target.value);
+                        setCheckOut(date.toLocaleDateString('en-GB'));
+                      }}
+                      className="w-full pl-6 text-neutral-900 bg-transparent border-0 focus:ring-0 p-0 text-sm font-medium"
+                    />
+                  </div>
+                </div>
+
+                {/* Guests */}
+                <div className="p-4 lg:p-6">
+                  <label className="block text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-2">
+                    Who
+                  </label>
+                  <div className="relative">
+                    <Users className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
                     <select
-                      value={rooms}
-                      onChange={(e) => setRooms(e.target.value)}
-                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50 appearance-none"
+                      value={guests}
+                      onChange={(e) => setGuests(e.target.value)}
+                      className="w-full pl-6 text-neutral-900 bg-transparent border-0 focus:ring-0 p-0 text-sm font-medium appearance-none"
                     >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5+</option>
+                      <option value="1 guest, 1 room">1 guest, 1 room</option>
+                      <option value="2 guests, 1 room">2 guests, 1 room</option>
+                      <option value="3 guests, 1 room">3 guests, 1 room</option>
+                      <option value="4 guests, 2 rooms">4 guests, 2 rooms</option>
+                      <option value="6 guests, 3 rooms">6 guests, 3 rooms</option>
                     </select>
                   </div>
                 </div>
 
-                {/* Promotion Code */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide">
-                    Promotion Code
-                  </label>
-                  <div className="relative">
-                    <Percent className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder=""
-                      value={promoCode}
-                      onChange={(e) => setPromoCode(e.target.value)}
-                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-gray-50"
-                    />
-                  </div>
-                </div>
-
                 {/* Search Button */}
-                <div>
+                <div className="p-4 lg:p-6">
                   <button
-                    onClick={handleCheckAvailability}
-                    className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 uppercase tracking-wide"
+                    type="submit"
+                    className="w-full h-12 bg-neutral-900 hover:bg-neutral-800 text-white font-medium flex items-center justify-center gap-2 transition-colors duration-200"
                   >
-                    Check Availability
+                    <Search className="h-4 w-4" />
+                    <span className="hidden sm:inline">Search</span>
                   </button>
                 </div>
               </div>
+
+              {/* Promo Code Row */}
+              {promoCode && (
+                <div className="border-t border-neutral-200 p-4 lg:p-6">
+                  <div className="flex items-center gap-3">
+                    <Percent className="h-4 w-4 text-neutral-400" />
+                    <input
+                      type="text"
+                      placeholder="Promo code"
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value)}
+                      className="flex-1 text-sm text-neutral-900 placeholder-neutral-400 bg-transparent border-0 focus:ring-0 p-0"
+                    />
+                  </div>
+                </div>
+              )}
+            </form>
+
+            {/* Promo Code Toggle */}
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => setPromoCode(promoCode ? '' : ' ')}
+                className="text-sm text-white/70 hover:text-white underline decoration-dotted underline-offset-4"
+              >
+                {promoCode ? 'Hide promo code' : 'Have a promo code?'}
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-40 flex gap-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-2 h-2 transition-all duration-300 ${
+              index === currentSlide 
+                ? 'bg-white w-6' 
+                : 'bg-white/40 hover:bg-white/60'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 
-export default Hero;
+export default Hero;  
