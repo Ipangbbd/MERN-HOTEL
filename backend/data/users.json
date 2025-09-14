@@ -9,46 +9,20 @@
     "role": "admin",
     "isActive": true,
     "createdAt": "2025-08-23T09:56:42.041Z",
-    "updatedAt": "2025-08-26T00:52:45.776Z",
-    "lastLogin": "2025-08-26T00:52:45.775Z"
+    "updatedAt": "2025-09-14T09:17:49.859Z",
+    "lastLogin": "2025-09-14T09:17:49.859Z"
   },
   {
-    "id": "11b06b73-735c-4554-8456-914db2cfd1fc",
-    "email": "ipangSiregar1@gmail.com",
-    "password": "$2b$12$5J8MO9c/QGpz96QISVwxGeaf9Rc4QBmKNphBd9RW70lVWTlFRcJUe",
-    "firstName": "Muhammad Ali",
-    "lastName": "Irfansyah",
-    "phone": "085890081550",
+    "id": "d9711b9a-11e4-4b98-a072-8863b78b2b3a",
+    "email": "User@gmail.com",
+    "password": "$2b$12$/1Rzpx7jDrVL.lb/otpqrue735f0tAW99AveuHqmeN9BqDk6LLZ6K",
+    "firstName": "User",
+    "lastName": "Hotel",
+    "phone": "111222333",
     "role": "guest",
     "isActive": true,
-    "createdAt": "2025-08-23T09:56:42.043Z",
-    "updatedAt": "2025-08-26T00:52:19.003Z",
-    "lastLogin": "2025-08-26T00:52:19.002Z"
-  },
-  {
-    "id": "b32ff27a-c571-4dbc-adc9-a8903ef6fc6d",
-    "email": "codevwithali@gmail.com",
-    "password": "$2b$12$JnYyGPl551v4UhyH2RZ3NelYTj5Gq.cVKJSj1PNFRFKjkWtUdg5Wm",
-    "firstName": "Joseph",
-    "lastName": "Stalin",
-    "phone": "88213113605",
-    "role": "guest",
-    "isActive": true,
-    "createdAt": "2025-08-25T21:44:09.835Z",
-    "updatedAt": "2025-08-25T21:44:09.836Z",
-    "lastLogin": null
-  },
-  {
-    "id": "4b9bca2d-6aee-413f-9083-242df131d295",
-    "email": "Hiura123@gmail.com",
-    "password": "$2b$12$NrGBvUCvk5PlAv9W4xmS3uN6xhCB/y2IiX9iYFpMdGsQjZOjqOxVG",
-    "firstName": "Hiura",
-    "lastName": "Mihate",
-    "phone": "88278091262",
-    "role": "guest",
-    "isActive": true,
-    "createdAt": "2025-08-26T00:02:56.088Z",
-    "updatedAt": "2025-08-26T00:02:56.088Z",
+    "createdAt": "2025-09-14T09:19:30.184Z",
+    "updatedAt": "2025-09-14T09:19:30.185Z",
     "lastLogin": null
   }
 ]

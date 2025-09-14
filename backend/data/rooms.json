@@ -4,11 +4,11 @@
     "roomNumber": "101",
     "type": "single",
     "price": 99,
-    "isBooked": true,
-    "guestName": "Muhammad Ali Irfansyah",
-    "guestId": "11b06b73-735c-4554-8456-914db2cfd1fc",
-    "checkInDate": "2025-08-27",
-    "checkOutDate": "2025-08-29",
+    "isBooked": false,
+    "guestName": null,
+    "guestId": null,
+    "checkInDate": null,
+    "checkOutDate": null,
     "amenities": [
       "Wi-Fi",
       "TV",
@@ -17,15 +17,16 @@
     "description": "Comfortable single room with city view",
     "imageUrl": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T11:23:43.363Z",
-    "updatedAt": "2025-08-25T21:43:17.462Z"
+    "updatedAt": "2025-09-14T09:19:43.512Z"
   },
   {
     "id": "3cbc6bf1-3761-4d88-9fdb-ca18a3d586a4",
     "roomNumber": "102",
     "type": "double",
-    "price": 149,
+    "price": 150,
     "isBooked": false,
     "guestName": null,
+    "guestId": null,
     "checkInDate": null,
     "checkOutDate": null,
     "amenities": [
@@ -37,7 +38,7 @@
     "description": "Spacious double room with garden view",
     "imageUrl": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T11:23:43.363Z",
-    "updatedAt": "2025-08-22T11:35:23.079Z"
+    "updatedAt": "2025-08-27T02:47:02.559Z"
   },
   {
     "id": "436ecd78-9225-4ff3-9d69-76f1943d8a41",
@@ -46,6 +47,7 @@
     "price": 299,
     "isBooked": false,
     "guestName": null,
+    "guestId": null,
     "checkInDate": null,
     "checkOutDate": null,
     "amenities": [
@@ -59,7 +61,7 @@
     "description": "Luxury suite with panoramic city view",
     "imageUrl": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T11:23:43.363Z",
-    "updatedAt": "2025-08-22T11:46:14.556Z"
+    "updatedAt": "2025-08-27T02:46:52.322Z"
   },
   {
     "id": "f71eb151-abda-4758-a5c4-19a1b22d2639",
@@ -300,10 +302,11 @@
     "roomNumber": "108",
     "type": "family",
     "price": 219,
-    "isBooked": true,
-    "guestName": "The Martinez Family",
-    "checkInDate": "2025-08-24",
-    "checkOutDate": "2025-08-30",
+    "isBooked": false,
+    "guestName": null,
+    "guestId": null,
+    "checkInDate": null,
+    "checkOutDate": null,
     "amenities": [
       "Wi-Fi",
       "TV",
@@ -318,7 +321,7 @@
     "description": "Premium family room with game console and pool view",
     "imageUrl": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     "createdAt": "2025-08-22T12:40:00.000Z",
-    "updatedAt": "2025-08-24T16:30:45.912Z"
+    "updatedAt": "2025-08-27T02:46:38.401Z"
   },
   {
     "id": "5c7e9a2d-8b4f-4d6a-2e8c-9f5a7b1d4e6c",
