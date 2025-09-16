@@ -151,12 +151,12 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchRooms();
     fetchStats();
     
-    const interval = setInterval(() => {
-      fetchRooms();
-      fetchStats();
-    }, 30000);
+    // const interval = setInterval(() => {
+    //   fetchRooms();
+    //   fetchStats();
+    // }, 30000);
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, []);
 
   const contextValue: RoomContextType = {

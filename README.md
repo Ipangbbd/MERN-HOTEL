@@ -1,6 +1,6 @@
 # Hotel Room Booking System
 
-A comprehensive full-stack hotel room booking system built with React, Node.js, Express, and a file-based storage system. Features real-time room availability tracking, booking management, and a complete admin panel.
+A full-stack hotel room booking system built with React, Node.js, Express, and a file-based storage system. Features real-time room availability tracking, booking management, and a complete admin panel.
 
 ![Hotel Auth(users/admin) System](images1.png)
 ![Hotel Booking System](images2.png)
